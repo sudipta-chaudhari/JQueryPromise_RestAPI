@@ -22,12 +22,31 @@
 
             $.blockUI();
 
+            //$.getJSON('https://api.github.com/users/' + userName)
+            //    .then(function (userInfo) {
+            //        getUserData(userInfo);
+            //    }).fail(function () {
+            //        $('.error').append(res.status + " : " + res.statusText);
+            //    }).always(function () {
+            //        $.unblockUI();
+            //    });
+
             $.getJSON('https://api.github.com/users/' + userName)
                 .then(function (userInfo) {
+                    //Get data from first api call
                     getUserData(userInfo);
-                }).fail(function() {
-                    $('.error').append(res.status + " : " + res.statusText);
-                }).always(function() {
+                    //Return data to second api call
+                    return $.getJSON('https://api.github.com/users/' + userName + '/repos')
+                        .then(function (userRepos) {
+                            $.each(userRepos, function (key, val) {
+                                $('#public_repos').append("(" + (key + 1) + ") " + val.name + "<br />");
+                            });
+                        });
+                })
+                .fail(function (error) {
+                    $('.error').append(error.status + " : " + error.statusText);
+                })
+                .always(function () {
                     $.unblockUI();
                 });
             
@@ -36,7 +55,7 @@
                 $('#name').append(userInfo.name);
                 $('#blog').append(userInfo.blog);
                 $('#location').append(userInfo.location);
-                $('#public_repos').append(userInfo.public_repos);
+                //$('#public_repos').append(userInfo.public_repos);
                 $('#created_at').append(userInfo.created_at);
                 $('#updated_at').append(userInfo.updated_at);
             }
@@ -71,7 +90,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-2">Create At</div>
+            <div class="col-md-2">Created At</div>
             <div id="created_at" class="col-md-3"></div>
         </div>
 

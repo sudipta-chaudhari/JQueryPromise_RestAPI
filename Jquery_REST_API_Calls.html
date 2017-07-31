@@ -32,7 +32,7 @@
                             $.each(userRepos, function (key, val) {
                                 //Get data from third api call
                                 $.getJSON('https://api.github.com/repos/' + userName + '/' + val.name).then(function (repoDetails) {
-                                    $('#public_repos').append("(" + (key + 1) + ") " + val.name + "; Created At : " + repoDetails.created_at
+                                    $('#public_repos').append("<b>" + val.name + "</b>; Created At : " + repoDetails.created_at
                                         + "; Updated At : " + repoDetails.updated_at + "<br />");
                                 });
                             });

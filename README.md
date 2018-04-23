@@ -4,4 +4,4 @@ Source code explaining how to call REST API in JQuery. GitHUB GET API to fetch u
 
 Replace 'sudipta-chaudhari' with your user name.
 
-Detailed description can be found at : https://sudiptach.wordpress.com/2017/07/17/jquery-promise-call-rest-api/
+Read detailed article/blog at : http://sudiptachaudhari.com/jquery-promise-call-rest-api/
